@@ -1,0 +1,39 @@
+{
+  "students": [
+    {
+      "id": "ba6e",
+      "name": "Alya",
+      "city": "Hurgada"
+    },
+    {
+      "id": "6732",
+      "name": "Alya",
+      "city": "Hurgada"
+    },
+    {
+      "id": "b881",
+      "name": "Alya",
+      "city": "Hurgada"
+    },
+    {
+      "id": "d8ed",
+      "name": "Alya",
+      "city": "Hurgada"
+    },
+    {
+      "id": "a7b6",
+      "name": "Rana",
+      "city": "Hurgada"
+    },
+    {
+      "id": "f738",
+      "name": "Jomana",
+      "city": "Cairo"
+    },
+    {
+      "id": "a19c",
+      "name": "Nada",
+      "city": "Alex"
+    }
+  ]
+}

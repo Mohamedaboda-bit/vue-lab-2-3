@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <title>Form</title>
+</head>
+<body>
+
+    <h1 class="text-center text-primary">Post Form</h1>
+    <div id="app" class="container py-4">
+        <form v-if="!isVisible">
+
+            <div class="mb-3">
+                <label for="title" class=" text-primary form-label">Title</label>
+            <input type="text" id="title" class="form-control" v-model="post.title" >
+            </div>
+
+            <div class="mb-3">
+                <label for="content" class=" text-primary form-label">Content</label>
+            <input type="text" id="content" class="form-control" v-model="post.content" >
+            </div>
+
+
+            <div class="mb-3">
+                <label  class=" text-primary form-label">Category</label>
+                <div v-for="category in postData.categories">
+                    <input type="radio" name="category" :value="category"  class="form-check-input" v-model="post.category" >
+                    <label class="form-check-label">{{category}}</label>
+                </div>           
+            </div>
+
+            <div>
+            <div class="mb-3">
+                <label  class=" text-primary form-label">Share</label>
+                <div v-for="share in postData.share">
+                    <input type="checkbox" name="share" :value="share"  class="form-check-input" v-model="post.share" >
+                    <label class="form-check-label">{{share}}</label>
+                </div> 
+            </div>
+            
+            <input type="checkbox" name="share" :value="share"  class=" form-check-input" v-model="postData.sendImmediately" true-value="Immediately" false-value="Later" >&nbsp;
+            <span class="fs-5 text-primary "> Share Immediately</span>
+               
+                </div>
+
+            <div class="mb-3">
+                <label  class=" text-primary form-label">Series</label>
+                <select v-model='post.series' class="form-select" >
+                    <option class="form-control" v-for="series in postData.series" :value="series">{{series}}</option>
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-primary" @click="isVisible=true" :disabled="isFormIncomplete">Next</button>
+            
+        </form>
+
+        <div class="border border-primary p-4" v-else>
+            <label class=" text-primary lead">Title: </label>
+            <p>{{post.title}}</p>
+
+            <label class=" text-primary lead">Content: </label>
+            <p>{{post.content}}</p>
+
+            <label class=" text-primary lead">Category: </label>
+            <p>{{post.category}}</p>
+
+            <label class=" text-primary lead">Series: </label>
+            <p>{{post.series}}</p>
+
+            <label class=" text-primary lead">Share Immediately: {{postData.sendImmediately}} </label><br>
+
+            <label class=" text-primary lead">Share on: </label>
+            <ul class="list-group">
+                <li class="list-group-item" v-for="share in post.share">{{share}}</li>
+            </ul>
+            
+
+            <button class="btn btn-primary" @click="isVisible=false" >Back</button>
+        </div>
+    </div>
+
+    
+
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app =Vue.createApp({
+            data:()=>({
+                isVisible:false,
+                post:{
+                    title:"",
+                    content:"",
+                    category:"",
+                    share:[],
+                    series:""
+                },
+                postData:{
+                    share:["Facebook","X","Instagram","LinkedIn"],
+                    series:["First","Second","Third"],
+                    categories:["Test","Develop","Design"],
+                    sendImmediately:false
+                }
+            }),
+            computed:{                
+                isFormIncomplete() {
+                    return !(this.post.title && this.post.content && this.post.category && this.post.share.length > 0 && this.post.series);
+                }
+            }
+        }).mount('#app');
+        
+    </script>
+</body>
+</html>
